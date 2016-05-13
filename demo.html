@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>pithyUpload</title>
+	<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.pithyUpload.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('#pithyUpload').pithyUpload({
+				trigger: 'change', 
+				dataType: 'text', 
+				allowedTypes: ["gif", "jpeg", "jpg", "bmp", "png"],
+				maxFiles: 8,
+				maxFileSize: 10 * 1024 * 1024,
+				extData: {
+					userid: 'gaoxin',
+					userpwd: '19931030'
+				},
+				onNewFile: function(file) {
+					console.log('new file:', file.name || file);
+				},
+				onComplete: function(data) {
+					if (data)
+						console.log('ie complete', data);
+					else
+						console.log('complete');
+				},
+				onUploadProgress: function(file, percent) {
+					console.log(file.name, percent);
+				},
+				onUploadSuccess: function(file, data, status, xhr) {
+					console.log(file.name, 'success - ', data);
+				},
+				onUploadError: function(file, xhr, status, err) {
+					console.log(file.name, 'error - ', status);
+				},
+				onFileTypeError: function(file) {
+					console.log('file type error', file);
+				},
+				onFileSizeError: function(file) {
+					console.log('file size error', file);
+				},
+				onFilesMaxError: function(file) {
+					console.log('files max error', file);
+				}
+			})
+		});
+	</script>
+</head>
+
+<body>
+	<input type="file" name="pithyUpload" id="pithyUpload" multiple="multiple">
+</body>
+
+</html>
